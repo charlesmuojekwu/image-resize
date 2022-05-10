@@ -10,6 +10,7 @@ use App\Http\Resources\V1\ImageManipulationResource;
 use App\Models\Album;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -22,7 +23,7 @@ class ImageManipulationController extends Controller
      */
     public function index()
     {
-        return ImageManipulationResource::collection(ImageManipulation::paginate(5));
+        return ImageManipulationResource::collection(ImageManipulation::where(['user_id' => auth()->id()])->paginate(5));
     }
 
 
